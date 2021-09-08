@@ -12,9 +12,16 @@ signup.addEventListener('submit', (e) => {
     const username = formData.get('username');
     const password = formData.get('password');
 
-  // set new user in LS
+  //check if username already exists
+  let userDB = getUserDB();
+  const userMatch = userDB.find(entry => (entry.user === username));
+  if (userMatch) {alert('That username already exists. Please choose another username.')}
+  else {
+// set new user in LS
   createUser(username, password);
-});
+  //direct user to page for creating task list
+  window.location = `./task-list/?username=${username}`;
+}});
 
 
 
@@ -28,11 +35,8 @@ loginForm.addEventListener('submit', (e) => {
   const userLoggingIn = formData.get('username');
   const pwLoggingIn = formData.get('password');
 
-  console.log(userLoggingIn, pwLoggingIn);
-
   //find user that matches both username and pw
-  let userMatch = getUser(userLoggingIn, pwLoggingIn);
-  console.log(userMatch);
+  getUser(userLoggingIn, pwLoggingIn);
   //direct user to page rendering their task list
-  
+  window.location = `./task-list/?username=${userLoggingIn}`;
 });
