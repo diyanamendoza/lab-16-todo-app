@@ -8,9 +8,9 @@ const currentUsername = data.get('username');
 
 // render tasks on page load
 let userTasks = getUserTaskList(currentUsername);
-renderTasks(userTasks);
+renderTasks(userTasks, currentUsername);
 
-//add task stuff
+//add task form
 const addTask = document.getElementById('add-task');
 addTask.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -23,5 +23,5 @@ addTask.addEventListener('submit', (e) => {
   // re-render task list
   const divToClear = document.getElementById('tasks-container');
   divToClear.textContent = '';
-  renderTasks(getUserTaskList(currentUsername));
+  renderTasks((getUserTaskList(currentUsername)), currentUsername);
 });

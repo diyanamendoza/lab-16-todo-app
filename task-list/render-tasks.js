@@ -1,4 +1,6 @@
-export function renderTasks(tasklist) {
+import { makeTaskComplete } from "../utils.js";
+
+export function renderTasks(tasklist, user) {
     const tasksContainer = document.getElementById('tasks-container');
     const ul = document.createElement('ul');
   
@@ -10,6 +12,7 @@ export function renderTasks(tasklist) {
       li.addEventListener('click', () => {
         li.classList.remove('task-list');
         li.classList.add('chopped');
+        makeTaskComplete(user, item.id);
       });
   
       ul.append(li);

@@ -73,3 +73,27 @@ export function getUserTaskList(user) {
   let currentUserEntry = userDB.find(entry => (entry.user === user));
   return currentUserEntry.tasks;
 }
+
+export function makeTaskComplete(user, taskID) {
+    //get the user database
+    let userDB = getUserDB();
+    //get the user's entry from the db
+    let userEntry = userDB.find(entry => entry.user === user);
+    //get the index of the user in the db (for use later)
+    const userIndex = userDB.indexOf(userEntry);
+
+    //get user task array
+    let taskArray = userEntry.tasks;
+    //loop through task array and set appropiate task to complete:true
+    for (let task of taskArray) {
+        if(task.id === taskID) {
+            task.completed = true;
+        }
+    }
+    //update the user's entry with updated taskarray
+    userEntry.tasks = taskArray;
+    //replace old user entry with new one
+    userDB[userIndex] = userEntry;
+    //update whole user db
+    setUserDB(userDB);
+}
