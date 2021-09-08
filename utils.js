@@ -65,3 +65,11 @@ export function updateUserTaskList(user, task) {
     //update whole user db
     setUserDB(userDB);
 };
+
+export function getUserTaskList(user) {
+      // get userDB
+  let userDB = getUserDB();
+  // get currentUser's task list from DB
+  let currentUserEntry = userDB.find(entry => (entry.user === user));
+  return currentUserEntry.tasks;
+}

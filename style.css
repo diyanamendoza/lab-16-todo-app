@@ -16,3 +16,6 @@ body {
 
 }
 
+.chopped {
+    text-decoration: line-through;
+}

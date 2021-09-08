@@ -1,15 +1,14 @@
-import { createTask, getUserDB, updateUserTaskList } from "../utils.js";
+import { createTask, getUserDB, getUserTaskList, updateUserTaskList } from "../utils.js";
+import { renderTasks } from "./render-tasks.js";
 
 // get username from URL param
 const data = new URLSearchParams(window.location.search);
 const currentUsername = data.get('username');
-// get userDB
-let userDB = getUserDB();
-// get currentUser's task list from DB
-let currentUserEntry = userDB.find(entry => (entry.user === currentUsername));
-let currentTaskList = currentUserEntry.tasks;
 
-console.log(currentTaskList);
+
+// render tasks on page load
+let userTasks = getUserTaskList(currentUsername);
+renderTasks(userTasks);
 
 //add task stuff
 const addTask = document.getElementById('add-task');
@@ -20,4 +19,9 @@ addTask.addEventListener('submit', (e) => {
 
   const task = createTask(newTask);
   updateUserTaskList(currentUsername, task);
+  
+  // re-render task list
+  const divToClear = document.getElementById('tasks-container');
+  divToClear.textContent = '';
+  renderTasks(getUserTaskList(currentUsername));
 });
