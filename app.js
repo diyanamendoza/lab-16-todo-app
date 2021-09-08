@@ -1,20 +1,19 @@
+import { createUser, getUser, getUserDB } from "./utils.js";
 
 
 
 // sign up form
-const signupForm = document.getElementById('signup-form');
+const signup = document.getElementById('signup-form');
 
-signupForm.addEventListener('submit', (e) => {
+signup.addEventListener('submit', (e) => {
   e.preventDefault();
   // create user object
-  const signupFormData = new FormData(signupForm);
-  const newUser = {
-    username: signupFormData.get('username'),
-    password: signupFormData.get('password'),
-    tasks: []
-  }
-  // set new user in LS
+  const formData = new FormData(signup);
+    const username = formData.get('username');
+    const password = formData.get('password');
 
+  // set new user in LS
+  createUser(username, password);
 });
 
 
@@ -25,13 +24,15 @@ const loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   // get user data
-  const loginFormData = new FormData(signupForm);
-  const userLoggingIn =  signupFormData.get('username');
-  const pwLoggingIn = signupFormData.get('password');
+  const formData = new FormData(loginForm);
+  const userLoggingIn = formData.get('username');
+  const pwLoggingIn = formData.get('password');
 
-  // find user in LS
-  //get users data from ls
+  console.log(userLoggingIn, pwLoggingIn);
+
   //find user that matches both username and pw
+  let userMatch = getUser(userLoggingIn, pwLoggingIn);
+  console.log(userMatch);
   //direct user to page rendering their task list
   
 });
