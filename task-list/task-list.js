@@ -5,10 +5,13 @@ import { renderTasks } from "./render-tasks.js";
 const data = new URLSearchParams(window.location.search);
 const currentUsername = data.get('username');
 
-
 // render tasks on page load
 let userTasks = getUserTaskList(currentUsername);
 renderTasks(userTasks, currentUsername);
+
+// render nav
+const userP = document.getElementById('user');
+userP.textContent = `User: ${currentUsername}`;
 
 //add task form
 const addTask = document.getElementById('add-task');
@@ -24,4 +27,13 @@ addTask.addEventListener('submit', (e) => {
   const divToClear = document.getElementById('tasks-container');
   divToClear.textContent = '';
   renderTasks((getUserTaskList(currentUsername)), currentUsername);
+
+  // clear input field
+  document.getElementById('task').value = '';
 });
+
+// //log out button
+// const logout = document.getElementById('logout');
+// logout.addEventListener('click', () => {
+//   window.location = '../index.html';
+// });
