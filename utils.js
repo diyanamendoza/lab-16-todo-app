@@ -128,15 +128,21 @@ export function removeCompletedTasks(user) {
 
     //get user task array
     let taskArray = userEntry.tasks;
+    console.log(taskArray);
+
+    //create new array of only completed: false tasks and store that array
+    let incompleteTasks = taskArray.filter(task => task.completed === false);
+
     //loop through task array and set appropiate task to complete:true
-    for (let task of taskArray) {
-        if(task.completed === true) {
-            const taskIndex = taskArray.indexOf(task);
-            taskArray.splice(taskIndex, 1);
-        }
-    }
+    // for (let task of taskArray) {
+    //     if(task.completed === true) {
+    //         const taskIndex = taskArray.indexOf(task);
+    //         taskArray.splice(taskIndex, 1);
+    //     }
+    // }
+
     //update the user's entry with updated taskarray
-    userEntry.tasks = taskArray;
+    userEntry.tasks = incompleteTasks;
     //replace old user entry with new one
     userDB[userIndex] = userEntry;
     //update whole user db
@@ -144,9 +150,13 @@ export function removeCompletedTasks(user) {
 }
 
 //source: https://stackoverflow.com/questions/4777077/removing-elements-by-class-name
-export function removeElementsByClass(className){
-    const elements = document.getElementsByClassName(className);
-    while(elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
-    }
-}
+// export function removeElementsByClass(className){
+//     const elements = document.getElementsByClassName(className);
+//     console.log(elements);
+//     //make a for loop
+//     for(let element of elements) {
+//         element.textContent = '';
+//     }
+    // while(elements.length > 0){
+    //     elements[0].parentNode.removeChild(elements[0]);
+    // }

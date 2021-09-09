@@ -1,4 +1,4 @@
-import { createTask, getUserTaskList, updateUserTaskList, removeElementsByClass, removeCompletedTasks } from "../utils.js";
+import { createTask, getUserTaskList, updateUserTaskList, removeCompletedTasks } from "../utils.js";
 import { renderTasks } from "./render-tasks.js";
 
 // get username from URL param
@@ -42,8 +42,6 @@ addTask.addEventListener('submit', (e) => {
     let currentTasksArray = getUserTaskList(currentUsername);
     let completedTasks = currentTasksArray.find(item => item.completed === true);
     if (completedTasks) {
-      //remove from DOM
-      removeElementsByClass('chopped');
       //remove from LS
       removeCompletedTasks(currentUsername)
       //re-render list
