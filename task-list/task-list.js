@@ -1,5 +1,5 @@
-import { createTask, getUserDB, getUserTaskList, updateUserTaskList } from "../utils.js";
-import { renderTasks, renderXs } from "./render-tasks.js";
+import { createTask, getUserTaskList, updateUserTaskList, removeElementsByClass, removeCompletedTasks } from "../utils.js";
+import { renderTasks } from "./render-tasks.js";
 
 // get username from URL param
 const data = new URLSearchParams(window.location.search);
@@ -32,12 +32,26 @@ addTask.addEventListener('submit', (e) => {
   document.getElementById('task').value = '';
 });
 
-//render clear completed tasks button if they exist
-
-
-
-// //log out button
-// const logout = document.getElementById('logout');
-// logout.addEventListener('click', () => {
-//   window.location = '../index.html';
-// });
+//render clear button that clears completed tasks from DOM and from LS, and then re-renders the whole list
+// while(userTasks.find(task => task.completed === true)) {
+  const clearButton = document.createElement('button');
+  clearButton.textContent = "Clear Chopped Tasks";
+  const clearDiv = document.getElementById('clear-button');
+  clearDiv.append(clearButton);
+  clearButton.addEventListener('click', () => {
+    let currentTasksArray = getUserTaskList(currentUsername);
+    let completedTasks = currentTasksArray.find(item => item.completed === true);
+    if (completedTasks) {
+      //remove from DOM
+      removeElementsByClass('chopped');
+      //remove from LS
+      removeCompletedTasks(currentUsername)
+      //re-render list
+      const divToClear = document.getElementById('tasks-container');
+      divToClear.textContent = '';
+      renderTasks((getUserTaskList(currentUsername)), currentUsername);
+    } else {
+      alert('No tasks to clear! Add and chop tasks first.');
+    }
+  });
+// }
