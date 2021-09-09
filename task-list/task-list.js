@@ -32,7 +32,8 @@ addTask.addEventListener('submit', (e) => {
   document.getElementById('task').value = '';
 });
 
-//render xs
+//render clear completed tasks button if they exist
+
 
 
 // //log out button
