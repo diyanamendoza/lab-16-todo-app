@@ -103,6 +103,7 @@ li {
     font-size: 2em;
     color: white;
     font-family: 'Glory', sans-serif;
+    cursor: pointer;
 
 }
 
@@ -136,4 +137,9 @@ input {
 
 #clear-button-before {
     background-color: gray;
+}
+
+#instruction-p {
+    margin: 0;
+    font-family: 'Glory', sans-serif;
 }
