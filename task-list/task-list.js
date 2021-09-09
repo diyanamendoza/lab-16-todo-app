@@ -30,6 +30,16 @@ addTask.addEventListener('submit', (e) => {
 
   // clear input field
   document.getElementById('task').value = '';
+
+  // render instruction if it's not there yet
+  if(!document.getElementById('instruction-p')) {
+    const instructionP = document.createElement('p');
+    instructionP.setAttribute('id', 'instruction-p');
+    instructionP.textContent = 'Click on a task to chop it!';
+    const addContainer = document.getElementById('add-task-container');
+    addContainer.append(instructionP);
+  }
+
 });
 
 //render clear button that clears completed tasks from DOM and from LS, and then re-renders the whole list
