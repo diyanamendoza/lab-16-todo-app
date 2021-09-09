@@ -36,7 +36,15 @@ loginForm.addEventListener('submit', (e) => {
   const pwLoggingIn = formData.get('password');
 
   //find user that matches both username and pw
-  getUser(userLoggingIn, pwLoggingIn);
-  //direct user to page rendering their task list
-  window.location = `./task-list/?username=${userLoggingIn}`;
+  let result = getUser(userLoggingIn, pwLoggingIn);
+  if (result === 'found') {
+    //direct user to page rendering their task list
+    window.location = `./task-list/?username=${userLoggingIn}`;}
+    else {
+      const createInstead = confirm(`Hmm... No dice. Would you like to create a new login with this info instead?`);
+      if (createInstead === true) {
+          createUser(userLoggingIn, pwLoggingIn);
+      }
+    }
+
 });

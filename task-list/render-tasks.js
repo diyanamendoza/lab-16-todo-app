@@ -1,4 +1,4 @@
-import { makeTaskComplete } from "../utils.js";
+import { getUserTaskList, makeTaskComplete, removeTask } from "../utils.js";
 
 export function renderTasks(tasklist, user) {
     const tasksContainer = document.getElementById('tasks-container');
@@ -21,8 +21,28 @@ export function renderTasks(tasklist, user) {
         li.classList.remove('task-list');
         li.classList.add('chopped');
         makeTaskComplete(user, item.id);
+        renderXs(user, item.id);
       });
   
       ul.append(li);
       tasksContainer.append(ul);
     }};
+
+
+export function renderXs(user, taskID) {
+  const choppedTasks = document.getElementsByClassName('chopped');
+  const ul = document.querySelector('ul');
+  for (let item of choppedTasks) {
+      const x = document.createElement('img');
+      x.src = '../assets/white-x.png'
+      x.classList.add('white-x');
+      item.appendChild(x);
+      x.addEventListener('click', () => {
+        removeTask(user, taskID);
+        ul.textContent = '';
+        let updatedList = (getUserTaskList(user));
+        renderTasks(updatedList, user);
+      })
+}};
+
+//FIX BUG WITH REMOVAL

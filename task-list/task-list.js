@@ -1,5 +1,5 @@
 import { createTask, getUserDB, getUserTaskList, updateUserTaskList } from "../utils.js";
-import { renderTasks } from "./render-tasks.js";
+import { renderTasks, renderXs } from "./render-tasks.js";
 
 // get username from URL param
 const data = new URLSearchParams(window.location.search);
@@ -31,6 +31,9 @@ addTask.addEventListener('submit', (e) => {
   // clear input field
   document.getElementById('task').value = '';
 });
+
+//render xs
+
 
 // //log out button
 // const logout = document.getElementById('logout');

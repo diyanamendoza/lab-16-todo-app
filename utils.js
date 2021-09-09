@@ -19,13 +19,8 @@ export function getUser(username, password) {
     let userDB = getUserDB();
     const userMatch = userDB.find(entry => (entry.user === username && entry.pw === password));
 
-    if (!userMatch) {
-        const createInstead = confirm(`Hmm... We couldn't find that login. Would you like to create a new login with this info instead?`);
-        if (createInstead === true) {
-            createUser(username, password);
-        }
-    }
-    return userMatch;
+    if (!userMatch) {return "nope";}
+    return "found";
 };
 
 export function createUser(username, password) {
@@ -96,4 +91,29 @@ export function makeTaskComplete(user, taskID) {
     userDB[userIndex] = userEntry;
     //update whole user db
     setUserDB(userDB);
+}
+
+export function removeTask(user, taskID) {
+        //get the user database
+        let userDB = getUserDB();
+        //get the user's entry from the db
+        let userEntry = userDB.find(entry => entry.user === user);
+        //get the index of the user in the db (for use later)
+        const userIndex = userDB.indexOf(userEntry);
+    
+        //get user task array
+        let taskArray = userEntry.tasks;
+        //loop through task array and set appropiate task to complete:true
+        for (let task of taskArray) {
+            if(task.id === taskID) {
+                const taskIndex = taskArray.indexOf(task);
+                taskArray.splice(taskIndex, 1);
+            }
+        }
+        //update the user's entry with updated taskarray
+        userEntry.tasks = taskArray;
+        //replace old user entry with new one
+        userDB[userIndex] = userEntry;
+        //update whole user db
+        setUserDB(userDB);
 }
