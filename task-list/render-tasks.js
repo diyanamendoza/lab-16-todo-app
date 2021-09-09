@@ -1,4 +1,4 @@
-import { makeTaskComplete, removeElementsByClass, removeCompletedTasks } from "../utils.js";
+import { makeTaskComplete } from "../utils.js";
 
 export function renderTasks(tasklist, user) {
     const tasksContainer = document.getElementById('tasks-container');
