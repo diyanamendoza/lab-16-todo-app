@@ -44,6 +44,8 @@ loginForm.addEventListener('submit', (e) => {
       const createInstead = confirm(`Hmm... No dice. Would you like to create a new login with this info instead?`);
       if (createInstead === true) {
           createUser(userLoggingIn, pwLoggingIn);
+          //direct user to page rendering their task list
+          window.location = `./task-list/?username=${userLoggingIn}`;
       }
     }
 
