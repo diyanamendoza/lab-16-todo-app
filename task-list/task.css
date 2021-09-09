@@ -1,0 +1,134 @@
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: black;
+
+}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+h1 {
+    color: white;
+    font-size: 3em;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 50px;
+}
+
+input {
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 200px;
+    padding: 20px;
+}
+
+label {
+    font-family: 'Glory', sans-serif;
+    font-size: 1.1em;
+}
+
+button {
+    cursor: pointer;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1em;
+    background-color: black;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 12px;
+    width: 200px;
+
+}
+
+button:active {
+    background: rgb(49, 41, 25);
+}
+
+/*chopping board*/
+
+#img-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../assets/cuttingboard.jpeg');
+    background-repeat:no-repeat;
+    background-position: top;
+    padding: 100px;
+    border-radius: 30px;
+    height: 1200px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items:baseline;
+    gap: 10px;
+    background-color: white;
+    opacity: .8;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: 'Glory', sans-serif;
+    font-size: 1.2em;
+
+
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+li {
+    list-style: none;
+    font-size: 2em;
+    color: white;
+    font-family: 'Glory', sans-serif;
+
+}
+
+#add-task, #add-task-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#add-task-container {
+    border: 1px solid black;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: white;
+    opacity: .8;
+    width: 400px;
+}
+
+input {
+    width: 300px;
+    font-family: 'Glory', sans-serif;
+    font-size: 1.2em;
+
+}
+
+.chopped {
+    text-decoration: line-through;
+}
