@@ -2,7 +2,11 @@
 import { getUserDB, 
     setUserDB, 
     getUser,
-    USERDB  } from "../utils.js";
+    updateUserTaskList,
+    USERDB,  
+    getUserTaskList,
+    makeTaskComplete,
+    removeCompletedTasks} from "../utils.js";
 
 const test = QUnit.test;
 
@@ -103,3 +107,119 @@ test('getUser should take in a username and password and return whether found', 
 //     expect.deepEqual(actual, expected);
 // });
 
+test('updateUserTaskList should take in a user and a task and update that users tasklist in LS', (expect) => {
+    //set sampleUserDB
+    const sampleUserDB = [{
+        user: 'test4',
+        pw: 'test4',
+        tasks: []
+    },
+    {
+        user: 'test5',
+        pw: 'test5',
+        tasks: []
+    }];
+
+    setUserDB(sampleUserDB);
+
+    //pass known user and sample task into function
+    updateUserTaskList('test4', 'buy eggs');
+
+    //get user db, parsed
+    let userDB = getUserDB();
+
+    //get user entry from userdb
+    let userEntry = userDB.find(entry => (entry.user === 'test4'));
+
+    const expectedTaskList = ['buy eggs'];
+    const actualTaskList = userEntry.tasks;
+
+    expect.deepEqual(actualTaskList, expectedTaskList);
+});
+
+test('getUserTaskList should take in a user and return tasklist', (expect) => {
+    //set sampleUserDB
+    const sampleUserDB = [{
+        user: 'test4',
+        pw: 'test4',
+        tasks: ['do laundry', 'mop floors']
+    },
+    {
+        user: 'test5',
+        pw: 'test5',
+        tasks: []
+    }];
+
+    setUserDB(sampleUserDB);
+
+    const expectedTaskList = ['do laundry', 'mop floors'];
+    const actualTaskList = getUserTaskList('test4');;
+
+    expect.deepEqual(actualTaskList, expectedTaskList);
+});
+
+test('makeTaskComplete should take in a user and taskID and set that task to completed: true', (expect) => {
+    //set sampleUserDB
+    const sampleUserDB = [{
+        user: 'test4',
+        pw: 'test4',
+        tasks: [
+            {id: 1, 
+            task: 'do laundry',
+            completed: false},
+            {id: 2,
+            task: 'mop floors',
+            completed: false}]
+    }];
+
+    setUserDB(sampleUserDB);
+
+    //call function
+    makeTaskComplete('test4', 1);
+
+    //get user db, parsed
+    let userDB = getUserDB();
+
+    //get user entry from userdb
+    let userEntry = userDB.find(entry => (entry.user === 'test4'));
+
+    //get user task array
+    let userTasks = userEntry.tasks;
+    let specificTask = userTasks.find(task => task.id === 1);
+
+    const expected = true;
+    const actual = specificTask.completed;
+
+    expect.deepEqual(actual, expected);
+});
+
+test('removeCompletedTasks should take in a user and remove all tasks with completed: true', (expect) => {
+    //set sampleUserDB
+    const sampleUserDB = [{
+        user: 'test4',
+        pw: 'test4',
+        tasks: [
+            {id: 1, 
+            task: 'do laundry',
+            completed: true},
+            {id: 2,
+            task: 'mop floors',
+            completed: true}]
+    }];
+
+    setUserDB(sampleUserDB);
+
+    //call function
+    removeCompletedTasks('test4');
+
+    //get user db, parsed
+    let userDB = getUserDB();
+
+    //get user entry from userdb
+    let userEntry = userDB.find(entry => (entry.user === 'test4'));
+
+    const expected = [];
+    const actual = userEntry.tasks;
+
+    expect.deepEqual(actual, expected);
+});
