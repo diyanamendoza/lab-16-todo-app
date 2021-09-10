@@ -67,7 +67,7 @@ export function getUserTaskList(user) {
   // get currentUser's task list from DB
   let currentUserEntry = userDB.find(entry => (entry.user === user));
   return currentUserEntry.tasks;
-}
+};
 
 export function makeTaskComplete(user, taskID) {
     //get the user database
@@ -91,7 +91,7 @@ export function makeTaskComplete(user, taskID) {
     userDB[userIndex] = userEntry;
     //update whole user db
     setUserDB(userDB);
-}
+};
 
 export function removeTask(user, taskID) {
         //get the user database
@@ -116,7 +116,7 @@ export function removeTask(user, taskID) {
         userDB[userIndex] = userEntry;
         //update whole user db
         setUserDB(userDB);
-}
+};
 
 export function removeCompletedTasks(user) {
     //get the user database
@@ -128,7 +128,6 @@ export function removeCompletedTasks(user) {
 
     //get user task array
     let taskArray = userEntry.tasks;
-    console.log(taskArray);
 
     //create new array of only completed: false tasks and store that array
     let incompleteTasks = taskArray.filter(task => task.completed === false);
@@ -147,16 +146,4 @@ export function removeCompletedTasks(user) {
     userDB[userIndex] = userEntry;
     //update whole user db
     setUserDB(userDB);
-}
-
-//source: https://stackoverflow.com/questions/4777077/removing-elements-by-class-name
-// export function removeElementsByClass(className){
-//     const elements = document.getElementsByClassName(className);
-//     console.log(elements);
-//     //make a for loop
-//     for(let element of elements) {
-//         element.textContent = '';
-//     }
-    // while(elements.length > 0){
-    //     elements[0].parentNode.removeChild(elements[0]);
-    // }
+};
